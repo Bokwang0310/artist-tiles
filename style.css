@@ -1,5 +1,7 @@
 * {
   user-select: none;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -8,16 +10,26 @@ h1 {
 }
 
 .container {
-  column-width: 350px;
-  column-gap: 15px;
+  display: grid;
+  max-width: 55em;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 27em; /* 400px */
+  grid-template-columns: repeat(auto-fill, minmax(13em, 1fr)); /* 150px */
+  grid-auto-rows: 1em; /* 20px */
+  grid-gap: 0.7em; /* 5px */
 }
 
 .container .img-box {
-  display: inline-block;
-  margin: 0;
-  margin-bottom: 15px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .container .img-box img {
   width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
