@@ -1,0 +1,23 @@
+* {
+  user-select: none;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3.5rem;
+}
+
+.container {
+  column-width: 350px;
+  column-gap: 15px;
+}
+
+.container .img-box {
+  display: inline-block;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.container .img-box img {
+  width: 100%;
+}
