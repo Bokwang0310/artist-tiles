@@ -1,3 +1,5 @@
+import { showModal } from "./modal.js";
+
 const imgs = document.querySelectorAll("img");
 
 imgs.forEach((img) => {
@@ -17,5 +19,12 @@ imgs.forEach((img) => {
       focusing.classList.remove("focus");
     }
     e.target.classList.add("focus");
+    showModal();
   });
+});
+
+document.querySelector("h1").addEventListener("click", () => {
+  const audio = new Audio("audios/Easy Life - Nightmares.mp3");
+  audio.volume = 0.1;
+  audio.play();
 });
