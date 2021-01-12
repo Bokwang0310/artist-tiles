@@ -1,19 +1,8 @@
-function setGrid() {
-  let grid = document.getElementsByClassName("container")[0];
-  let rowHeight = parseInt(
-    window.getComputedStyle(grid).getPropertyValue("grid-auto-rows")
-  );
-  let rowGap = parseInt(
-    window.getComputedStyle(grid).getPropertyValue("grid-row-gap")
-  );
+const imgs = document.querySelectorAll("img");
 
-  let item = grid.getElementsByClassName("img-box");
-  for (let i = 0; i < item.length; ++i) {
-    item[i].style.gridRowEnd = `span ${Math.floor(
-      item[i].children[0].offsetHeight / 25
-    )}`;
-  }
-}
-
-window.addEventListener("load", setGrid);
-window.addEventListener("resize", setGrid);
+imgs.forEach((img) => {
+  img.addEventListener("click", (e) => {
+    e.target.style.filter = "brightness(50%)";
+    console.log(e.target.style.filter);
+  });
+});
