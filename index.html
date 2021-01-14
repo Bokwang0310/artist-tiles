@@ -50,12 +50,10 @@
     <div class="modal">
       <div class="modal-content">
         <span class="modal-close">✖</span>
-        <p>Some text..</p>
         <!-- audio player -->
-        <div class="audio-wave"></div>
+        <div class="waveform"></div>
         <div class="audio-control">
           <div class="play-btn play">▶</div>
-          <div class="progress"></div>
           <div class="volume-control">
             <div class="volume-btn">🔊</div>
             <div class="volume-slider">
@@ -68,10 +66,14 @@
     </div>
     <!-- // modal -->
     <script src="./grid.js"></script>
-    <script type="module" src="./modal.js"></script>
     <script type="module" src="./script.js"></script>
+    <script type="module" src="./modal.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="./wave.js"></script>
   </body>
 </html>
+
+<!-- TODO : h1 마진 -->
 
 <!-- https://codepen.io/EmNudge/pen/rRbLJQ : how to custom audio control -->
 <!-- https://mjmjmj98.tistory.com/31 : how to control audio in js -->

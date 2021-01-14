@@ -23,8 +23,8 @@ imgs.forEach((img) => {
   });
 });
 
-document.querySelector("h1").addEventListener("click", () => {
-  const audio = new Audio("audios/Easy Life - Nightmares.mp3");
-  audio.volume = 0.1;
-  audio.play();
-});
+// document.querySelector("h1").addEventListener("click", () => {
+//   const audio = new Audio("audios/Easy Life - Nightmares.mp3");
+//   audio.volume = 0.1;
+//   audio.play();
+// });

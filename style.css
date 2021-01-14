@@ -93,6 +93,15 @@ img.focus {
   transform: scale(1.5);
 }
 
+.waveform {
+  margin: 5% auto;
+  cursor: pointer;
+}
+
+wave {
+  width: 100%;
+}
+
 .volume-control {
   cursor: pointer;
 }
