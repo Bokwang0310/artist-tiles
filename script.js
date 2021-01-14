@@ -21,6 +21,11 @@ imgs.forEach((img) => {
     }
     e.target.classList.add("focus");
     showModal();
+    // TOOD: music loading logic
+    wavesurfer.load("./audios/Easy Life - Nightmares.mp3");
+    wavesurfer.on("ready", () => {
+      wavesurfer.play();
+    });
   });
 });
 

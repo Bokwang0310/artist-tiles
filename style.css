@@ -46,7 +46,7 @@ img.focus {
 /* modal */
 
 .modal {
-  display: block; /* default none */
+  display: none; /* default none */
   position: fixed;
   z-index: 1;
   left: 0;

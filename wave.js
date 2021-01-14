@@ -15,9 +15,3 @@ export const wavesurfer = WaveSurfer.create({
   hideScrollbar: true,
   barMinHeight: 2,
 });
-
-wavesurfer.load("./audios/Easy Life - Nightmares.mp3");
-
-wavesurfer.on("ready", function () {
-  wavesurfer.play();
-});
