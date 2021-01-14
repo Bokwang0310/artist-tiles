@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artist Tiles</title>
     <link rel="stylesheet" href="./style.css" />
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   </head>
   <body>
     <h1>Artist Tiles</h1>
@@ -51,13 +52,17 @@
       <div class="modal-content">
         <span class="modal-close">✖</span>
         <!-- audio player -->
-        <div class="waveform"></div>
-        <div class="audio-control">
-          <div class="play-btn play">▶</div>
-          <div class="volume-control">
-            <div class="volume-btn">🔊</div>
-            <div class="volume-slider">
-              <div class="volume-percentage"></div>
+        <div class="audio-player">
+          <div class="waveform"></div>
+          <div class="audio-control">
+            <i class="play-btn fas fa-play fa-lg"></i>
+            <!-- fa-pause -->
+            <div class="volume-control">
+              <i class="volume-btn fas fa-volume-up fa-lg"></i>
+              <!-- volume-down volume-off volume-mute -->
+              <div class="volume-slider">
+                <div class="volume-percentage"></div>
+              </div>
             </div>
           </div>
         </div>

@@ -62,12 +62,13 @@ img.focus {
   background-color: #fefefe;
   left: 0;
   right: 0;
-  margin: 6% auto;
-  width: 70%;
-  height: 70%;
-  padding: 1.4em;
+  margin: 6em auto;
+  width: 70%; /* 70% */
+  height: 40em;
+  padding: 1.4%;
   border: 1px solid #aaa;
   opacity: 90%;
+  border-radius: 0.2em;
 }
 
 .modal-close {
@@ -85,16 +86,11 @@ img.focus {
 }
 /* // modal */
 
-.play-btn {
-  cursor: pointer;
-}
-
-.play-btn:hover {
-  transform: scale(1.5);
+.audio-player {
+  margin: 5em auto;
 }
 
 .waveform {
-  margin: 5% auto;
   cursor: pointer;
 }
 
@@ -102,8 +98,32 @@ wave {
   width: 100%;
 }
 
-.volume-control {
+.audio-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4em auto;
+}
+
+.play-btn {
   cursor: pointer;
+  margin: auto 0.5em;
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+}
+
+.volume-control {
+}
+
+.volume-btn {
+  cursor: pointer;
+  margin: auto 0.5em;
+}
+
+.volume-btn:hover {
+  transform: scale(1.1);
 }
 
 .volume-slider {
