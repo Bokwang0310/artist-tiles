@@ -1,4 +1,5 @@
 import { showModal } from "./modal.js";
+import { wavesurfer } from "./wave.js";
 
 const imgs = document.querySelectorAll("img");
 
@@ -23,8 +24,20 @@ imgs.forEach((img) => {
   });
 });
 
-// document.querySelector("h1").addEventListener("click", () => {
-//   const audio = new Audio("audios/Easy Life - Nightmares.mp3");
-//   audio.volume = 0.1;
-//   audio.play();
-// });
+const playBtnBox = document.querySelector(".play-btn-container");
+
+playBtnBox.addEventListener("click", (e) => {
+  const playBtn = e.currentTarget.querySelector(".play-btn");
+  playBtn.classList.toggle("fa-play");
+  playBtn.classList.toggle("fa-pause");
+  wavesurfer.playPause();
+});
+
+const volumeBtnBox = document.querySelector(".volume-btn-container");
+const previousStatus = null;
+
+volumeBtnBox.addEventListener("click", (e) => {
+  const volumeBtn = e.currentTarget.querySelector(".volume-btn");
+  volumeBtn.classList.toggle("fa-volume-up");
+  volumeBtn.classList.toggle("fa-volume-off");
+});

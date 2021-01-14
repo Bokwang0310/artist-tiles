@@ -55,10 +55,13 @@
         <div class="audio-player">
           <div class="waveform"></div>
           <div class="audio-control">
-            <i class="play-btn fas fa-play fa-lg"></i>
-            <!-- fa-pause -->
+            <div class="play-btn-container">
+              <i class="play-btn fas fa-pause fa-lg"></i>
+            </div>
             <div class="volume-control">
-              <i class="volume-btn fas fa-volume-up fa-lg"></i>
+              <div class="volume-btn-container">
+                <i class="volume-btn fas fa-volume-up fa-lg"></i>
+              </div>
               <!-- volume-down volume-off volume-mute -->
               <div class="volume-slider">
                 <div class="volume-percentage"></div>
@@ -74,7 +77,7 @@
     <script type="module" src="./script.js"></script>
     <script type="module" src="./modal.js"></script>
     <script src="https://unpkg.com/wavesurfer.js"></script>
-    <script src="./wave.js"></script>
+    <script type="module" src="./wave.js"></script>
   </body>
 </html>
 

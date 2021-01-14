@@ -1,4 +1,4 @@
-const wavesurfer = WaveSurfer.create({
+export const wavesurfer = WaveSurfer.create({
   container: ".waveform",
   waveColor: "violet",
   progressColor: "purple", // played wave color

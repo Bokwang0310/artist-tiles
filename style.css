@@ -64,11 +64,12 @@ img.focus {
   right: 0;
   margin: 6em auto;
   width: 70%; /* 70% */
-  height: 40em;
+  height: 70%;
   padding: 1.4%;
   border: 1px solid #aaa;
   opacity: 90%;
   border-radius: 0.2em;
+  overflow: hidden;
 }
 
 .modal-close {
@@ -87,7 +88,7 @@ img.focus {
 /* // modal */
 
 .audio-player {
-  margin: 5em auto;
+  margin: 7em auto;
 }
 
 .waveform {
