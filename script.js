@@ -46,3 +46,27 @@ volumeBtnBox.addEventListener("click", (e) => {
   volumeBtn.classList.toggle("fa-volume-up");
   volumeBtn.classList.toggle("fa-volume-off");
 });
+
+const volumeControl = document.querySelector(".volume-control");
+const volumeSlider = document.querySelector(".volume-slider");
+
+// TODO: set delay
+volumeControl.addEventListener("mouseover", (e) => {
+  volumeSlider.classList.add("hover");
+});
+
+volumeControl.addEventListener("mouseout", (e) => {
+  volumeSlider.classList.remove("hover");
+});
+
+const volumePercentage = document.querySelector(".volume-percentage");
+
+volumeSlider.addEventListener("click", (e) => {
+  const sliderWidth = volumeSlider.offsetWidth;
+  const newVolume = e.offsetX / parseInt(sliderWidth);
+  wavesurfer.setVolume(newVolume);
+  volumePercentage.style.width = `${newVolume * 100}%`;
+  // audio.volume = newVolume;
+  // audioPlayer.querySelector(".controls .volume-percentage").style.width =
+  //   newVolume * 100 + "%";
+});

@@ -116,6 +116,9 @@ wave {
 }
 
 .volume-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .volume-btn {
@@ -128,8 +131,21 @@ wave {
 }
 
 .volume-slider {
+  display: inline-block;
+  cursor: pointer;
+  /* border: 1px solid black; */
+  height: 0.7em;
+  width: 0;
+  background-color: violet;
+  transition: 0.25s;
+}
+
+.hover {
+  width: 7em;
 }
 
 .volume-percentage {
-  background: coral;
+  background: purple;
+  height: 100%;
+  width: 75%;
 }
