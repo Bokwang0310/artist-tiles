@@ -1,4 +1,4 @@
-function setGrid() {
+export const setGrid = () => {
   let grid = document.querySelector(".container");
   let rowHeight = parseInt(
     window.getComputedStyle(grid).getPropertyValue("grid-auto-rows")
@@ -13,7 +13,4 @@ function setGrid() {
       item[i].children[0].offsetHeight / 25
     )}`;
   }
-}
-
-window.addEventListener("load", setGrid);
-window.addEventListener("resize", setGrid);
+};
