@@ -133,7 +133,6 @@ wave {
 .volume-slider {
   display: inline-block;
   cursor: pointer;
-  /* border: 1px solid black; */
   height: 0.7em;
   width: 0;
   background-color: violet;
@@ -147,5 +146,5 @@ wave {
 .volume-percentage {
   background: purple;
   height: 100%;
-  width: 75%;
+  width: 50%;
 }

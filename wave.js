@@ -15,3 +15,5 @@ export const wavesurfer = WaveSurfer.create({
   hideScrollbar: true,
   barMinHeight: 2,
 });
+
+wavesurfer.setVolume(0.5);

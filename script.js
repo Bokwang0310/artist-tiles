@@ -29,6 +29,8 @@ imgs.forEach((img) => {
   });
 });
 
+// TODO: Make control evente nable after waveserfer is loaded
+
 const playBtnBox = document.querySelector(".play-btn-container");
 
 playBtnBox.addEventListener("click", (e) => {
@@ -39,12 +41,19 @@ playBtnBox.addEventListener("click", (e) => {
 });
 
 const volumeBtnBox = document.querySelector(".volume-btn-container");
-const previousStatus = null;
+let isDown = false;
 
 volumeBtnBox.addEventListener("click", (e) => {
-  const volumeBtn = e.currentTarget.querySelector(".volume-btn");
-  volumeBtn.classList.toggle("fa-volume-up");
+  const volumeBtn = document.querySelector(".volume-btn");
+
+  if (isDown) {
+    volumeBtn.classList.toggle("fa-volume-down");
+  } else {
+    volumeBtn.classList.toggle("fa-volume-up");
+  }
   volumeBtn.classList.toggle("fa-volume-off");
+
+  wavesurfer.toggleMute();
 });
 
 const volumeControl = document.querySelector(".volume-control");
@@ -62,11 +71,26 @@ volumeControl.addEventListener("mouseout", (e) => {
 const volumePercentage = document.querySelector(".volume-percentage");
 
 volumeSlider.addEventListener("click", (e) => {
+  const volumeBtn = document.querySelector(".volume-btn");
+
+  if (wavesurfer.getMute()) {
+    wavesurfer.setMute(false);
+    volumeBtn.classList.remove("fa-volume-off");
+  }
+
   const sliderWidth = volumeSlider.offsetWidth;
   const newVolume = e.offsetX / parseInt(sliderWidth);
+
+  if (newVolume * 100 < 50) {
+    volumeBtn.classList.remove("fa-volume-up");
+    volumeBtn.classList.add("fa-volume-down");
+    isDown = true;
+  } else {
+    volumeBtn.classList.remove("fa-volume-down");
+    volumeBtn.classList.add("fa-volume-up");
+    isDown = false;
+  }
+
   wavesurfer.setVolume(newVolume);
   volumePercentage.style.width = `${newVolume * 100}%`;
-  // audio.volume = newVolume;
-  // audioPlayer.querySelector(".controls .volume-percentage").style.width =
-  //   newVolume * 100 + "%";
 });
