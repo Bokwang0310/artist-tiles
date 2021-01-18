@@ -1,16 +1,16 @@
 export const setGrid = () => {
-  let grid = document.querySelector(".container");
-  let rowHeight = parseInt(
+  const grid = document.querySelector(".container");
+  const rowHeight = parseInt(
     window.getComputedStyle(grid).getPropertyValue("grid-auto-rows")
   );
-  let rowGap = parseInt(
+  const rowGap = parseInt(
     window.getComputedStyle(grid).getPropertyValue("grid-row-gap")
   );
 
-  let item = grid.querySelectorAll(".img-box");
-  for (let i = 0; i < item.length; ++i) {
-    item[i].style.gridRowEnd = `span ${Math.floor(
-      item[i].children[0].offsetHeight / 25
+  const itemList = grid.querySelectorAll(".img-box");
+  itemList.forEach((item) => {
+    item.style.gridRowEnd = `span ${Math.floor(
+      item.children[0].offsetHeight / 25
     )}`;
-  }
+  });
 };
