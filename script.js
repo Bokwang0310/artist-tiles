@@ -1,3 +1,4 @@
+import { createImgElements } from "./tiles.js";
 import { setGrid } from "./grid.js";
 import { showModal } from "./modal.js";
 import { wavesurfer } from "./wave.js";
@@ -51,55 +52,20 @@ function addImgEvent(img) {
 function preprocessCloseModal() {}
 
 function init() {
+  createImgElements([
+    "Ariana Grande",
+    "Easy Life",
+    "Jack Stauber",
+    "Heyden",
+    "Ariana Grande",
+    "Clay And Friends",
+    "Jack Stauber",
+  ]);
+
   window.addEventListener("load", setGrid);
   window.addEventListener("resize", setGrid);
 
   document.querySelectorAll("img").forEach(addImgEvent);
-
-  function getKeyByValue(object, value) {
-    return Object.keys(object).find((key) => object[key] === value);
-  }
-
-  fetch("./order_list.json")
-    .then((res) => {
-      return res.json();
-    })
-    .then((obj) => {
-      const target = "Supalonely";
-      let correctArray = null;
-
-      console.log(target);
-      console.log("\n");
-
-      const vals = Object.values(obj);
-
-      // vals.every((ele, i) => {
-      //   if (
-      //     ele.find((value) => {
-      //       target === value;
-      //     })
-      //   ) {
-      //     correctArray = vals[i];
-      //     console.log("e!");
-      //     return false;
-      //   }
-      //   return true;
-      // });
-
-      let i = 0;
-      for (const ele of vals) {
-        if (ele.includes(target)) {
-          correctArray = vals[i];
-          console.log("e!");
-          break;
-        }
-        i++;
-      }
-
-      console.log(correctArray);
-
-      console.log(["Supalonely", "Glitter"].includes("Supalonely"));
-    });
 }
 
 init();
