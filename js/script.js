@@ -5,7 +5,7 @@ import { wavesurfer } from "./wave.js";
 import { addVolumeControlEvent } from "./volume.js";
 
 function handlePlayClick(e) {
-  const playBtn = e.currentTarget.querySelector(".play-btn");
+  const playBtn = e.currentTarget.querySelector(".audio-player .play-btn");
 
   playBtn.classList.toggle("fa-play");
   playBtn.classList.toggle("fa-pause");
@@ -16,11 +16,23 @@ function handlePlayClick(e) {
 function handleClickImg(e) {
   const focusing = document.querySelector(".focus");
 
+  const hiddenMiniAudioPlayer = document.querySelector(
+    ".mini-audio-player.show"
+  );
+
   if (focusing !== null) {
     focusing.classList.remove("focus");
+    hiddenMiniAudioPlayer.classList.remove("show");
   }
 
   e.target.classList.add("focus");
+  e.target.parentElement
+    .querySelector(".mini-audio-player")
+    .classList.toggle("show");
+
+  // TODO: check which one pressed
+  // => new one : init modal icon and reload new music
+  // => current one : leave all
   showModal();
 
   // TOOD: implement music loading logic and stop music when modal closed.. or diff way
@@ -28,7 +40,9 @@ function handleClickImg(e) {
 
   wavesurfer.on("ready", () => {
     wavesurfer.play();
-    const playBtnBox = document.querySelector(".play-btn-container");
+    const playBtnBox = document.querySelector(
+      ".audio-player .play-btn-container"
+    );
     playBtnBox.addEventListener("click", handlePlayClick);
     addVolumeControlEvent();
   });
@@ -46,10 +60,31 @@ function addImgEvent(img) {
   });
 
   img.addEventListener("click", handleClickImg);
+
+  window.addEventListener("load", () => {
+    const playBtnContainer = img.parentElement.querySelector(
+      ".mini-audio-player .play-btn-container"
+    );
+
+    playBtnContainer.addEventListener("click", (e) => {
+      e.currentTarget
+        .querySelector(".play-btn")
+        .classList.toggle("fa-pause-circle");
+      e.currentTarget
+        .querySelector(".play-btn")
+        .classList.toggle("fa-play-circle");
+
+      wavesurfer.playPause();
+    });
+  });
 }
 
 // TODO: export preprocessing to modal.js
-function preprocessCloseModal() {}
+// => if click "other" switch not current one
+function preprocessChangeMusic() {
+  const playBtn = document.querySelector(".audio-player .play-btn");
+  const volumeBtn = document.querySelector(".audio-player .volume-btn");
+}
 
 function init() {
   createImgElements([

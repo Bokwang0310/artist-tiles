@@ -28,7 +28,20 @@ export const createImgElements = (artistList) => {
     img.src = `./images/${artist}.jpg`;
     img.alt = artist;
 
+    const miniAudioPlayer = document.createElement("div");
+    miniAudioPlayer.classList.add("mini-audio-player");
+
+    const playBtn = document.createElement("i");
+    playBtn.classList.add("play-btn", "far", "fa-pause-circle", "fa-2x");
+
+    const playBtnContainer = document.createElement("div");
+    playBtnContainer.classList.add("play-btn-container");
+
+    playBtnContainer.appendChild(playBtn);
+    miniAudioPlayer.appendChild(playBtnContainer);
+
     imgBox.appendChild(img);
+    imgBox.appendChild(miniAudioPlayer);
     container.appendChild(imgBox);
   });
 };

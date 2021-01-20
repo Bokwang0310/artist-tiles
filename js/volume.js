@@ -1,7 +1,7 @@
 import { wavesurfer } from "./wave.js";
 
 function handleClickMute(isDown) {
-  const volumeBtn = document.querySelector(".volume-btn");
+  const volumeBtn = document.querySelector(".audio-player .volume-btn");
 
   if (isDown) {
     volumeBtn.classList.toggle("fa-volume-down");
@@ -28,7 +28,7 @@ function addToggleSliderEvent(volumeSlider) {
 
 function handleClickSlider(e, isDown, volumeSlider) {
   const volumePercentage = document.querySelector(".volume-percentage");
-  const volumeBtn = document.querySelector(".volume-btn");
+  const volumeBtn = document.querySelector(".audio-player .volume-btn");
 
   if (wavesurfer.getMute()) {
     wavesurfer.setMute(false);
@@ -55,7 +55,9 @@ function handleClickSlider(e, isDown, volumeSlider) {
 export const addVolumeControlEvent = () => {
   let isDown = false;
 
-  const volumeBtnBox = document.querySelector(".volume-btn-container");
+  const volumeBtnBox = document.querySelector(
+    ".audio-player .volume-btn-container"
+  );
   volumeBtnBox.addEventListener("click", () => {
     handleClickMute(isDown);
   });

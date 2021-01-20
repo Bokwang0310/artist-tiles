@@ -41,6 +41,28 @@ img.focus {
   transform: translate(-50%, -50%);
   transition: filter ease 1s 0s;
   filter: brightness(40%) blur(0.3em);
+  /* TODO: mini player (play/pause, volume) 
+  later: => album pic*/
+}
+
+.mini-audio-player.show {
+  color: white;
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.mini-audio-player {
+  display: none;
+}
+
+.mini-audio-player .play-btn:hover {
+  transform: scale(1.1);
 }
 
 /* modal */
@@ -106,12 +128,12 @@ wave {
   margin: 4em auto;
 }
 
-.play-btn {
+.audio-player .play-btn {
   cursor: pointer;
   margin: auto 0.5em;
 }
 
-.play-btn:hover {
+.audio-player .play-btn:hover {
   transform: scale(1.1);
 }
 
@@ -121,12 +143,12 @@ wave {
   justify-content: center;
 }
 
-.volume-btn {
+.audio-player .volume-btn {
   cursor: pointer;
   margin: auto 0.5em;
 }
 
-.volume-btn:hover {
+.audio-player .volume-btn:hover {
   transform: scale(1.1);
 }
 
