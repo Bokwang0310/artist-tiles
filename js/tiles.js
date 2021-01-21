@@ -14,6 +14,21 @@ function shuffle(array) {
   return copy;
 }
 
+// will use
+function getImgSrc(url, size = "big") {
+  if (url === null) {
+    return "";
+  }
+
+  const results = url.match("[\\?&]v=([^&#]*)");
+  const video = results === null ? url : results[1];
+
+  if (size === "small") {
+    return "http://img.youtube.com/vi/" + video + "/2.jpg";
+  }
+  return "http://img.youtube.com/vi/" + video + "/0.jpg";
+}
+
 export const createImgElements = (artistList) => {
   const shuffledList = shuffle(artistList);
 
@@ -25,6 +40,8 @@ export const createImgElements = (artistList) => {
 
     const img = document.createElement("img");
     // TODO: use youtube profile
+    // const thumb = getImgSrc("https://www.youtube.com/watch?v=D3gmU0GOTXI");
+    // img.src = thumb;
     img.src = `./images/${artist}.jpg`;
     img.alt = artist;
 
