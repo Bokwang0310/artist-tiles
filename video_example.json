@@ -1,0 +1,40 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "AgoQpog-8ByEA5hrkuCxgzFbmj8",
+  "nextPageToken": "CAEQAA",
+  "regionCode": "KR",
+  "pageInfo": { "totalResults": 1000000, "resultsPerPage": 1 },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "4315x400YkX6pzHxeCjL6VMa0N8",
+      "id": { "kind": "youtube#video", "videoId": "D3gmU0GOTXI" },
+      "snippet": {
+        "publishedAt": "2019-09-16T22:00:04Z",
+        "channelId": "UCd3A38YO4NEG0Skd2qn5J4A",
+        "title": "BENEE - Glitter (Official Video)",
+        "description": "BENEE – Glitter Check out my new album Hey u x. Available now: http://BENEE.lnk.to/HeyuxYD Stream / Download: https://BENEE.lnk.to/Glitter Don't forget to ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/D3gmU0GOTXI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/D3gmU0GOTXI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/D3gmU0GOTXI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "BeneeMusicVEVO",
+        "liveBroadcastContent": "none",
+        "publishTime": "2019-09-16T22:00:04Z"
+      }
+    }
+  ]
+}

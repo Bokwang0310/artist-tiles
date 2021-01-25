@@ -1,0 +1,20 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "Cie9kADO-QMHYPFl8IifXH9nBwk",
+  "nextPageToken": "CAEQAA",
+  "regionCode": "KR",
+  "pageInfo": {
+    "totalResults": 11324,
+    "resultsPerPage": 1
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "bqOXi3rdpovGpDFB3EVycFnvwck",
+      "id": {
+        "kind": "youtube#channel",
+        "channelId": "UCqkzefLq9-QoYwFwolcImQw"
+      }
+    }
+  ]
+}

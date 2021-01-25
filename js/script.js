@@ -86,16 +86,27 @@ function preprocessChangeMusic() {
   const volumeBtn = document.querySelector(".audio-player .volume-btn");
 }
 
-function init() {
-  createImgElements([
-    "Ariana Grande",
-    "Easy Life",
-    "Jack Stauber",
-    "Heyden",
-    "Ariana Grande",
-    "Clay And Friends",
-    "Jack Stauber",
-  ]);
+function spreadArrayOfKeys(obj) {
+  const entryList = Object.entries(obj);
+
+  const result = entryList.reduce((prev, curr, i) => {
+    const [key, valueList] = curr;
+    const spreaded = valueList.map((value) => {
+      return { artist: key, name: value };
+    });
+    if (i === 0) {
+      return [...spreaded];
+    }
+    return [...prev, ...spreaded];
+  }, 0);
+
+  return result;
+}
+
+async function init() {
+  const orderObj = await fetch("./order.json").then((res) => res.json());
+  const musicList = spreadArrayOfKeys(orderObj);
+  createImgElements(musicList);
 
   window.addEventListener("load", setGrid);
   window.addEventListener("resize", setGrid);
