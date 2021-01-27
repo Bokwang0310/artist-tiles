@@ -1,4 +1,4 @@
-import { getApiKey, getChannelImg } from "./youtube_api.js";
+import { getApiKey, storeChannelImg } from "./youtube_api.js";
 
 function shuffle(arr) {
   return arr.sort(() => Math.random() - 0.5);
@@ -11,15 +11,15 @@ function getThumbnail(videoId, size = "big") {
   return `https://img.youtube.com/vi/${videoId}/0.jpg`;
 }
 
-async function createMusicElement(API_KEY, container, music) {
+function createMusicElement(container, channelImgList, music) {
   const imgBox = document.createElement("div");
   imgBox.classList.add("img-box");
 
   const img = document.createElement("img");
 
-  // const channelImg = await getChannelImg(music.artist, API_KEY)
-  // img.src = channelImg;
-  // img.alt = music.name;
+  const channelImg = channelImgList[music.artist];
+  img.src = channelImg;
+  img.alt = music.name;
 
   const miniAudioPlayer = document.createElement("div");
   miniAudioPlayer.classList.add("mini-audio-player");
@@ -38,13 +38,14 @@ async function createMusicElement(API_KEY, container, music) {
   container.appendChild(imgBox);
 }
 
-export const createImgElements = async (musicList) => {
+export const createImgElements = async (artistList, musicList) => {
   const API_KEY = await getApiKey("./youtube_data_api_v3_key.txt");
 
   const container = document.querySelector(".container");
 
-  const shuffledList = shuffle(musicList);
-  shuffledList.forEach((music) => {
-    createMusicElement(API_KEY, container, music);
+  const channelImgList = await storeChannelImg(artistList, API_KEY);
+
+  shuffle(musicList).forEach((music) => {
+    createMusicElement(container, channelImgList, music);
   });
 };

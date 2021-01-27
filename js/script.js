@@ -86,6 +86,7 @@ function preprocessChangeMusic() {
   const volumeBtn = document.querySelector(".audio-player .volume-btn");
 }
 
+// TODO: use flat
 function spreadArrayOfKeys(obj) {
   const entryList = Object.entries(obj);
 
@@ -98,15 +99,18 @@ function spreadArrayOfKeys(obj) {
       return [...spreaded];
     }
     return [...prev, ...spreaded];
-  }, 0);
+  }, {});
 
   return result;
 }
 
 async function init() {
   const orderObj = await fetch("./order.json").then((res) => res.json());
+
+  const artistList = Object.keys(orderObj);
   const musicList = spreadArrayOfKeys(orderObj);
-  createImgElements(musicList);
+
+  createImgElements(artistList, musicList);
 
   window.addEventListener("load", setGrid);
   window.addEventListener("resize", setGrid);
