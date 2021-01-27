@@ -11,7 +11,9 @@ function getThumbnail(videoId, size = "big") {
   return `https://img.youtube.com/vi/${videoId}/0.jpg`;
 }
 
-function createMusicElement(container, channelImgList, music) {
+function createMusicElement(channelImgList, music) {
+  const container = document.querySelector(".container");
+
   const imgBox = document.createElement("div");
   imgBox.classList.add("img-box");
 
@@ -41,11 +43,13 @@ function createMusicElement(container, channelImgList, music) {
 export const createImgElements = async (artistList, musicList) => {
   const API_KEY = await getApiKey("./youtube_data_api_v3_key.txt");
 
-  const container = document.querySelector(".container");
-
-  const channelImgList = await storeChannelImg(artistList, API_KEY);
+  // const channelImgList = await storeChannelImg(artistList, API_KEY);
+  const channelImgList = {
+    BENEE:
+      "https://yt3.ggpht.com/ytc/AAUvwninsslw_7HKA70ldU4z0C88dItlPwFCGrQkp-1b-Q=s240-c-k-c0xffffffff-no-rj-mo",
+  };
 
   shuffle(musicList).forEach((music) => {
-    createMusicElement(container, channelImgList, music);
+    createMusicElement(channelImgList, music);
   });
 };

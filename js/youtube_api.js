@@ -2,11 +2,24 @@ export const getApiKey = (path) => {
   return fetch(path).then((res) => res.text());
 };
 
-function queryObjToString(obj) {}
+function queryObjToString(obj) {
+  const queryStr = Object.entries(obj).reduce((prev, [key, value]) => {
+    return `${prev}&${key}=${value}`;
+  }, "");
+
+  return queryStr;
+}
 
 function getChannelImg(API_KEY, artist) {
   const baseURL = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}`;
-  const url = `${baseURL}&part=snippet&maxResults=1&q=${artist}&type=channel`;
+  const queryObj = {
+    part: "snippet",
+    maxResults: "1",
+    q: artist,
+    type: "channel",
+  };
+
+  const url = baseURL + queryObjToString(queryObj);
   return fetch(url)
     .then((res) => res.json())
     .then((obj) => obj.items[0].snippet.thumbnails.medium.url)
