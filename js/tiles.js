@@ -1,15 +1,5 @@
 import { getApiKey, storeChannelImg } from "./youtube_api.js";
-
-function shuffle(arr) {
-  return arr.sort(() => Math.random() - 0.5);
-}
-
-function getThumbnail(videoId, size = "big") {
-  if (size === "small") {
-    return `https://img.youtube.com/vi/${videoId}/2.jpg`;
-  }
-  return `https://img.youtube.com/vi/${videoId}/0.jpg`;
-}
+import { shuffle } from "./utils.js";
 
 function createMusicElement(channelImgList, music) {
   const container = document.querySelector(".container");
@@ -41,7 +31,7 @@ function createMusicElement(channelImgList, music) {
 }
 
 export const createImgElements = async (artistList, musicList) => {
-  const API_KEY = await getApiKey("./youtube_data_api_v3_key.txt");
+  // const API_KEY = await getApiKey("./youtube_data_api_v3_key.txt");
 
   // const channelImgList = await storeChannelImg(artistList, API_KEY);
   const channelImgList = {

@@ -3,6 +3,7 @@ import { setGrid } from "./grid.js";
 import { showModal } from "./modal.js";
 import { wavesurfer } from "./wave.js";
 import { addVolumeControlEvent } from "./volume.js";
+import { spreadArrayOfKeys } from "./utils.js";
 
 function handlePlayClick(e) {
   const playBtn = e.currentTarget.querySelector(".audio-player .play-btn");
@@ -15,7 +16,6 @@ function handlePlayClick(e) {
 
 function handleClickImg(e) {
   const focusing = document.querySelector(".focus");
-
   const hiddenMiniAudioPlayer = document.querySelector(
     ".mini-audio-player.show"
   );
@@ -84,24 +84,6 @@ function addImgEvent(img) {
 function preprocessChangeMusic() {
   const playBtn = document.querySelector(".audio-player .play-btn");
   const volumeBtn = document.querySelector(".audio-player .volume-btn");
-}
-
-// TODO: use flat
-function spreadArrayOfKeys(obj) {
-  const entryList = Object.entries(obj);
-
-  const result = entryList.reduce((prev, curr, i) => {
-    const [key, valueList] = curr;
-    const spreaded = valueList.map((value) => {
-      return { artist: key, name: value };
-    });
-    if (i === 0) {
-      return [...spreaded];
-    }
-    return [...prev, ...spreaded];
-  }, {});
-
-  return result;
 }
 
 async function init() {
