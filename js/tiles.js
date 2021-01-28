@@ -12,7 +12,7 @@ function createMusicElement(channelImgList, music) {
 
   const channelImg = channelImgList[music.artist];
   img.src = channelImg;
-  img.alt = music.name;
+  img.alt = `${music.artist} - ${music.name}`;
 
   const miniAudioPlayer = document.createElement("div");
   miniAudioPlayer.classList.add("mini-audio-player");
@@ -32,16 +32,17 @@ function createMusicElement(channelImgList, music) {
 }
 
 export const createImgElements = async (artistList, musicList) => {
-  // const API_KEY = await getApiKey("./youtube_data_api_v3_key.txt");
+  const API_KEY = await getApiKey("./youtube_data_api_v3_key.txt");
 
-  // const channelImgList = await storeChannelImg(artistList, API_KEY);
-  const channelImgList = {
-    BENEE:
-      "https://yt3.ggpht.com/ytc/AAUvwninsslw_7HKA70ldU4z0C88dItlPwFCGrQkp-1b-Q=s240-c-k-c0xffffffff-no-rj-mo",
-  };
+  const channelImgList = await storeChannelImg(artistList, API_KEY);
+  // const channelImgList = {
+  //   BENEE:
+  //     "https://yt3.ggpht.com/ytc/AAUvwninsslw_7HKA70ldU4z0C88dItlPwFCGrQkp-1b-Q=s240-c-k-c0xffffffff-no-rj-mo",
+  // };
 
   shuffle(musicList).forEach((music) => {
     createMusicElement(channelImgList, music);
   });
+
   setGrid();
 };

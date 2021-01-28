@@ -1,10 +1,10 @@
 // TODO: use flat
 export const spreadArrayOfKeys = (obj) => {
-  const result = Object.entries(obj).reduce((prev, [key, valueList]) => {
+  const result = Object.entries(obj).reduce((acc, [key, valueList]) => {
     const spreaded = valueList.map((value) => {
       return { artist: key, name: value };
     });
-    return [...prev, ...spreaded];
+    return [...acc, ...spreaded];
   }, []);
 
   return result;
@@ -22,8 +22,8 @@ export const getThumbnail = (videoId, size = "big") => {
 };
 
 export const queryObjToString = (obj) => {
-  const queryStr = Object.entries(obj).reduce((prev, [key, value]) => {
-    return `${prev}&${key}=${value}`;
+  const queryStr = Object.entries(obj).reduce((acc, [key, value]) => {
+    return `${acc}&${key}=${value}`;
   }, "");
 
   return queryStr;

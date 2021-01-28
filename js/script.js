@@ -36,7 +36,7 @@ function handleClickImg(e) {
   showModal();
 
   // TOOD: implement music loading logic and stop music when modal closed.. or diff way
-  wavesurfer.load("./audios/Easy Life - Nightmares.mp3");
+  wavesurfer.load(`./audios/${e.target.alt}.mp3`);
 
   wavesurfer.on("ready", () => {
     wavesurfer.play();
@@ -67,6 +67,7 @@ function addImgEvent(img) {
     );
 
     playBtnContainer.addEventListener("click", (e) => {
+      console.log(e.target, e.currentTarget);
       e.currentTarget
         .querySelector(".play-btn")
         .classList.toggle("fa-pause-circle");
@@ -98,12 +99,12 @@ async function init() {
   const artistList = Object.keys(orderObj);
   const musicList = spreadArrayOfKeys(orderObj);
 
-  createImgElements(artistList, musicList);
+  await createImgElements(artistList, musicList);
 
   window.addEventListener("load", setGrid);
   window.addEventListener("resize", setGrid);
 
-  document.querySelectorAll("img").forEach(addImgEvent);
+  document.querySelectorAll("img").forEach((img) => addImgEvent(img));
 }
 
 init();
