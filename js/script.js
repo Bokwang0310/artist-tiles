@@ -86,8 +86,14 @@ function preprocessChangeMusic() {
   const volumeBtn = document.querySelector(".audio-player .volume-btn");
 }
 
+async function getOrder(path) {
+  return await fetch(path)
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+}
+
 async function init() {
-  const orderObj = await fetch("./order.json").then((res) => res.json());
+  const orderObj = await getOrder("./order.json");
 
   const artistList = Object.keys(orderObj);
   const musicList = spreadArrayOfKeys(orderObj);

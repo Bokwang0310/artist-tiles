@@ -1,0 +1,61 @@
+.audio-player {
+  margin: 7em auto;
+}
+
+.waveform {
+  cursor: pointer;
+}
+
+wave {
+  width: 100%;
+}
+
+.audio-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4em auto;
+}
+
+.audio-player .play-btn {
+  cursor: pointer;
+  margin: auto 0.5em;
+}
+
+.audio-player .play-btn:hover {
+  transform: scale(1.1);
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audio-player .volume-btn {
+  cursor: pointer;
+  margin: auto 0.5em;
+}
+
+.audio-player .volume-btn:hover {
+  transform: scale(1.1);
+}
+
+.volume-slider {
+  display: inline-block;
+  cursor: pointer;
+  height: 0.7em;
+  width: 0;
+  background-color: violet;
+  transition: 0.25s;
+}
+
+.hover {
+  width: 7em;
+}
+
+.volume-percentage {
+  background: purple;
+  height: 100%;
+  width: 50%;
+}
