@@ -28,3 +28,9 @@ export const queryObjToString = (obj) => {
 
   return queryStr;
 };
+
+export const getOrder = async (path) => {
+  return await fetch(path)
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+};

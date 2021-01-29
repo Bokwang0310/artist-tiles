@@ -3,18 +3,24 @@ import { setGrid } from "./grid.js";
 import { showModal } from "./modal.js";
 import { wavesurfer } from "./wave.js";
 import { addVolumeControlEvent } from "./volume.js";
-import { spreadArrayOfKeys } from "./utils.js";
-
-function handlePlayClick(e) {
-  const playBtn = e.currentTarget.querySelector(".audio-player .play-btn");
-
-  playBtn.classList.toggle("fa-play");
-  playBtn.classList.toggle("fa-pause");
-
-  wavesurfer.playPause();
-}
+import { spreadArrayOfKeys, getOrder } from "./utils.js";
 
 function handleClickImg(e) {
+  if (!wavesurfer.isPlaying()) {
+    const modalPlay = document.querySelector(".audio-player .play-btn");
+    const miniPlayList = document.querySelectorAll(
+      ".mini-audio-player .play-btn"
+    );
+
+    modalPlay.classList.remove("fa-play");
+    modalPlay.classList.add("fa-pause");
+
+    miniPlayList.forEach((miniPlay) => {
+      miniPlay.classList.remove("fa-play-circle");
+      miniPlay.classList.add("fa-pause-circle");
+    });
+  }
+
   const focusing = document.querySelector(".focus");
   const hiddenMiniAudioPlayer = document.querySelector(
     ".mini-audio-player.show"
@@ -25,27 +31,28 @@ function handleClickImg(e) {
     hiddenMiniAudioPlayer.classList.remove("show");
   }
 
+  if (!e.target.classList.contains("focus")) {
+    const playBtnBox = document.querySelector(
+      ".audio-player .play-btn-container"
+    );
+    playBtnBox.removeEventListener("click", togglePlay);
+
+    wavesurfer.load(`./audios/${e.target.alt}.mp3`);
+    wavesurfer.on("ready", () => {
+      wavesurfer.play();
+
+      playBtnBox.addEventListener("click", togglePlay);
+      addVolumeControlEvent();
+    });
+  }
+  showModal();
+
   e.target.classList.add("focus");
   e.target.parentElement
     .querySelector(".mini-audio-player")
     .classList.toggle("show");
 
-  // TODO: check which one pressed
-  // => new one : init modal icon and reload new music
-  // => current one : leave all
-  showModal();
-
   // TOOD: implement music loading logic and stop music when modal closed.. or diff way
-  wavesurfer.load(`./audios/${e.target.alt}.mp3`);
-
-  wavesurfer.on("ready", () => {
-    wavesurfer.play();
-    const playBtnBox = document.querySelector(
-      ".audio-player .play-btn-container"
-    );
-    playBtnBox.addEventListener("click", handlePlayClick);
-    addVolumeControlEvent();
-  });
 }
 
 function addImgEvent(img) {
@@ -60,24 +67,31 @@ function addImgEvent(img) {
   });
 
   img.addEventListener("click", handleClickImg);
+}
 
-  window.addEventListener("load", () => {
-    const playBtnContainer = img.parentElement.querySelector(
-      ".mini-audio-player .play-btn-container"
-    );
+function handleClickMiniPlayer(e) {
+  if (e.target.classList[0] === "mini-audio-player") {
+    showModal();
+  } else {
+    togglePlay();
+  }
+}
 
-    playBtnContainer.addEventListener("click", (e) => {
-      console.log(e.target, e.currentTarget);
-      e.currentTarget
-        .querySelector(".play-btn")
-        .classList.toggle("fa-pause-circle");
-      e.currentTarget
-        .querySelector(".play-btn")
-        .classList.toggle("fa-play-circle");
+function togglePlay() {
+  const modalPlay = document.querySelector(".audio-player .play-btn");
+  const miniPlayList = document.querySelectorAll(
+    ".mini-audio-player .play-btn"
+  );
 
-      wavesurfer.playPause();
-    });
+  modalPlay.classList.toggle("fa-play");
+  modalPlay.classList.toggle("fa-pause");
+
+  miniPlayList.forEach((miniPlay) => {
+    miniPlay.classList.toggle("fa-play-circle");
+    miniPlay.classList.toggle("fa-pause-circle");
   });
+
+  wavesurfer.playPause();
 }
 
 // TODO: export preprocessing to modal.js
@@ -85,12 +99,6 @@ function addImgEvent(img) {
 function preprocessChangeMusic() {
   const playBtn = document.querySelector(".audio-player .play-btn");
   const volumeBtn = document.querySelector(".audio-player .volume-btn");
-}
-
-async function getOrder(path) {
-  return await fetch(path)
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
 }
 
 async function init() {
@@ -103,6 +111,11 @@ async function init() {
 
   window.addEventListener("load", setGrid);
   window.addEventListener("resize", setGrid);
+
+  const miniPlayerList = document.querySelectorAll(".mini-audio-player");
+  miniPlayerList.forEach((miniPlayer) => {
+    miniPlayer.addEventListener("click", handleClickMiniPlayer);
+  });
 
   document.querySelectorAll("img").forEach((img) => addImgEvent(img));
 }
