@@ -14,13 +14,6 @@ export const shuffle = (arr) => {
   return arr.sort(() => Math.random() - 0.5);
 };
 
-export const getThumbnail = (videoId, size = "big") => {
-  if (size === "small") {
-    return `https://img.youtube.com/vi/${videoId}/2.jpg`;
-  }
-  return `https://img.youtube.com/vi/${videoId}/0.jpg`;
-};
-
 export const queryObjToString = (obj) => {
   const queryStr = Object.entries(obj).reduce((acc, [key, value]) => {
     return `${acc}&${key}=${value}`;

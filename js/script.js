@@ -22,13 +22,10 @@ function handleClickImg(e) {
   }
 
   const focusing = document.querySelector(".focus");
-  const hiddenMiniAudioPlayer = document.querySelector(
-    ".mini-audio-player.show"
-  );
 
   if (focusing !== null) {
     focusing.classList.remove("focus");
-    hiddenMiniAudioPlayer.classList.remove("show");
+    document.querySelector(".mini-audio-player.show").classList.remove("show");
   }
 
   if (!e.target.classList.contains("focus")) {
@@ -45,14 +42,13 @@ function handleClickImg(e) {
       addVolumeControlEvent();
     });
   }
-  showModal();
 
   e.target.classList.add("focus");
   e.target.parentElement
     .querySelector(".mini-audio-player")
     .classList.toggle("show");
 
-  // TOOD: implement music loading logic and stop music when modal closed.. or diff way
+  showModal();
 }
 
 function addImgEvent(img) {
@@ -102,15 +98,15 @@ function preprocessChangeMusic() {
 }
 
 async function init() {
-  const orderObj = await getOrder("./order.json");
+  window.addEventListener("load", setGrid);
+  window.addEventListener("resize", setGrid);
 
+  const orderObj = await getOrder("./order.json");
   const artistList = Object.keys(orderObj);
   const musicList = spreadArrayOfKeys(orderObj);
 
   await createImgElements(artistList, musicList);
-
-  window.addEventListener("load", setGrid);
-  window.addEventListener("resize", setGrid);
+  setGrid();
 
   const miniPlayerList = document.querySelectorAll(".mini-audio-player");
   miniPlayerList.forEach((miniPlayer) => {

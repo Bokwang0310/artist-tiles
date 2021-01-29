@@ -21,23 +21,6 @@ function getChannelImg(API_KEY, artist) {
     .catch((err) => console.error(err));
 }
 
-// export const getAudio = (API_KEY, musicName) => {
-//   const baseURL = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}`;
-//   const url =
-//     baseURL +
-//     queryObjToString({
-//       part: "snippet",
-//       maxResults: "1",
-//       q: musicName,
-//       type: "video",
-//     });
-
-//   return fetch(url)
-//     .then((res) => res.json())
-//     .then((obj) => console.log(obj))
-//     .catch((err) => console.error(err));
-// };
-
 export const storeChannelImg = (artistList, API_KEY) => {
   return artistList.reduce(async (acc, curr) => {
     const resolvedAcc = await acc.then();
