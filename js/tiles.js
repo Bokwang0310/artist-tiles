@@ -1,5 +1,6 @@
 import { getApiKey, storeChannelImg } from "./youtube_api.js";
 import { shuffle } from "./utils.js";
+import { setGrid } from "./grid.js";
 
 function createMusicElement(channelImgList, music) {
   const container = document.querySelector(".container");
@@ -41,4 +42,6 @@ export const createImgElements = async (artistList, musicList) => {
   shuffle(musicList).forEach((music) => {
     createMusicElement(channelImgList, music);
   });
+
+  console.log(document.querySelectorAll(".img-box"));
 };
