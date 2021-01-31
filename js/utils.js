@@ -27,3 +27,9 @@ export const getOrder = async (path) => {
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
+
+export const hasSameElements = (arr1, arr2) => {
+  return arr1.every((item) => {
+    return arr2.includes(item);
+  });
+};

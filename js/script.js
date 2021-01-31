@@ -98,9 +98,8 @@ function preprocessChangeMusic() {
 }
 
 async function init() {
-  // window.addEventListener("load", setGrid);
-  // document.addEventListener("load", setGrid);
-  // window.addEventListener("resize", setGrid);
+  window.addEventListener("load", setGrid);
+  window.addEventListener("resize", setGrid);
 
   const orderObj = await getOrder("./order.json");
   const artistList = Object.keys(orderObj);

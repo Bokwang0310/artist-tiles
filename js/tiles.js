@@ -1,5 +1,5 @@
 import { getApiKey, storeChannelImg } from "./youtube_api.js";
-import { shuffle } from "./utils.js";
+import { shuffle, hasSameElements } from "./utils.js";
 import { setGrid } from "./grid.js";
 
 function createMusicElement(channelImgList, music) {
@@ -31,14 +31,40 @@ function createMusicElement(channelImgList, music) {
   container.appendChild(imgBox);
 }
 
+function isCached(oldObj, newArr) {
+  if (!oldObj) {
+    return false;
+  }
+
+  const oldArr = Object.keys(oldObj);
+
+  if (oldArr.length !== newArr.length || !hasSameElements(oldArr, newArr)) {
+    return false;
+  }
+
+  return true;
+}
+
+async function getChannelImgList(oldObj, newArr, API_KEY) {
+  if (isCached(oldObj, newArr)) {
+    return oldObj;
+  }
+
+  // const channelImgList = await storeChannelImg(newArr, API_KEY);
+  // sessionStorage.setItem("channelImgList", JSON.stringify(channelImgList));
+  // return channelImgList;
+
+  return await fetch("./channel_img_list_example.json").then((res) =>
+    res.json()
+  );
+}
+
 export const createImgElements = async (artistList, musicList) => {
   const API_KEY = await getApiKey("./youtube_data_api_v3_key.txt");
 
-  // TODO: cache with localstorage
-  // const channelImgList = await storeChannelImg(artistList, API_KEY);
-  const channelImgList = await fetch(
-    "./channel_img_list_example.json"
-  ).then((res) => res.json());
+  const oldObj = JSON.parse(sessionStorage.getItem("channelImgList"));
+
+  const channelImgList = await getChannelImgList(oldObj, artistList, API_KEY);
 
   shuffle(musicList).forEach((music) => {
     createMusicElement(channelImgList, music);

@@ -54,6 +54,7 @@ img {
 
 img.focus {
   filter: brightness(40%) blur(0.3em);
+  transform: translate(-50%, -50%);
 }
 
 .mini-audio-player.show {
