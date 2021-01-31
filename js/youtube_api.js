@@ -1,10 +1,10 @@
 import { queryObjToString } from "./utils.js";
 
-export const getApiKey = (path) => {
+export const getApiKey = async (path) => {
   return fetch(path).then((res) => res.text());
 };
 
-function getChannelImg(API_KEY, artist) {
+async function getChannelImg(API_KEY, artist) {
   const baseURL = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}`;
   const url =
     baseURL +
