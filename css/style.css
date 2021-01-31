@@ -50,15 +50,10 @@ img {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: filter ease 1s 0s;
 }
 
 img.focus {
-  transform: translate(-50%, -50%);
-  transition: filter ease 1s 0s;
   filter: brightness(40%) blur(0.3em);
-  /* TODO: mini player (play/pause, volume) 
-  later: => album pic*/
 }
 
 .mini-audio-player.show {

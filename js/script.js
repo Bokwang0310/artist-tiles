@@ -118,3 +118,5 @@ async function init() {
 }
 
 init();
+
+// TODO: edit img hover effect

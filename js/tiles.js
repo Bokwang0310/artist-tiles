@@ -34,6 +34,7 @@ function createMusicElement(channelImgList, music) {
 export const createImgElements = async (artistList, musicList) => {
   const API_KEY = await getApiKey("./youtube_data_api_v3_key.txt");
 
+  // TODO: cache with localstorage
   // const channelImgList = await storeChannelImg(artistList, API_KEY);
   const channelImgList = await fetch(
     "./channel_img_list_example.json"
@@ -42,6 +43,4 @@ export const createImgElements = async (artistList, musicList) => {
   shuffle(musicList).forEach((music) => {
     createMusicElement(channelImgList, music);
   });
-
-  console.log(document.querySelectorAll(".img-box"));
 };
