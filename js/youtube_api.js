@@ -1,4 +1,4 @@
-import { queryObjToString } from "./utils.js";
+import { objToQueryString } from "./utils.js";
 
 export const getApiKey = async (path) => {
   return fetch(path).then((res) => res.text());
@@ -8,7 +8,7 @@ async function getChannelImg(API_KEY, artist) {
   const baseURL = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}`;
   const url =
     baseURL +
-    queryObjToString({
+    objToQueryString({
       part: "snippet",
       maxResults: "1",
       q: artist,
@@ -23,10 +23,15 @@ async function getChannelImg(API_KEY, artist) {
 
 export const storeChannelImg = (artistList, API_KEY) => {
   return artistList.reduce(async (acc, curr) => {
-    const resolvedAcc = await acc.then();
+    const img = await getChannelImg(API_KEY, curr);
 
-    const url = await getChannelImg(API_KEY, curr);
-
-    return Object.assign(resolvedAcc, { [curr]: url });
+    return Object.assign(await acc.then(), { [curr]: img });
   }, Promise.resolve({}));
 };
+// export const callFunctionByElement = (arr, API_KEY) => {
+//   return arr.reduce(async (acc, curr) => {
+//     const response = await getChannelImg(API_KEY, curr);
+
+//     return Object.assign(await acc.then(), { [curr]: response });
+//   }, Promise.resolve({}));
+// };

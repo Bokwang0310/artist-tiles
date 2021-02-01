@@ -1,26 +1,17 @@
-// TODO: use flat
-export const spreadArrayOfKeys = (obj) => {
-  return Object.entries(obj).reduce((acc, [key, valueList]) => {
-    const spreaded = valueList.map((value) => {
-      return { artist: key, name: value };
+export const spreadArrayEachKey = (obj, keyName1, keyName2) => {
+  return Object.entries(obj).flatMap((entry) => {
+    const [key, ...arr] = entry.flat();
+    return arr.map((item) => {
+      return { [keyName1]: key, [keyName2]: item };
     });
-    return [...acc, ...spreaded];
-  }, []);
-
-  // entries.map((ele) => {
-  //   f = ele.flat();
-  //   [a, ...r] = f;
-  //   return [...r].map((e) => {
-  //     return { [a]: e };
-  //   });
-  // });
+  });
 };
 
 export const shuffle = (arr) => {
   return arr.sort(() => Math.random() - 0.5);
 };
 
-export const queryObjToString = (obj) => {
+export const objToQueryString = (obj) => {
   return Object.entries(obj).reduce((acc, [key, value]) => {
     return `${acc}&${key}=${value}`;
   }, "");

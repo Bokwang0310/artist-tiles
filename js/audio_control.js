@@ -80,3 +80,20 @@ export const addVolumeControlEvent = () => {
   // => set percentage's width value by wavesurfer's default volume not editing css.
   // => the setting will implement after adjusting music volume.
 };
+
+export const togglePlay = () => {
+  const modalPlay = document.querySelector(".audio-player .play-btn");
+  const miniPlayList = document.querySelectorAll(
+    ".mini-audio-player .play-btn"
+  );
+
+  modalPlay.classList.toggle("fa-play");
+  modalPlay.classList.toggle("fa-pause");
+
+  miniPlayList.forEach((miniPlay) => {
+    miniPlay.classList.toggle("fa-play-circle");
+    miniPlay.classList.toggle("fa-pause-circle");
+  });
+
+  wavesurfer.playPause();
+};
