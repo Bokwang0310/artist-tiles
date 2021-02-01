@@ -5,7 +5,7 @@ export const wavesurfer = WaveSurfer.create({
   cursorColor: "#333", // cursor bar's color
   cursorWidth: 2, // cursor bar's width
   barHeight: 0.8,
-  height: 400, // TODO: set height and modal content's entire size
+  height: 250, // TODO: set height and modal content's entire size
   width: 500,
   barWidth: 5,
   responsive: true,
@@ -14,6 +14,9 @@ export const wavesurfer = WaveSurfer.create({
   scrollParent: false,
   hideScrollbar: true,
   barMinHeight: 2,
+  normalize: true,
 });
 
 wavesurfer.setVolume(0.5);
+
+// http://wavesurfer-js.org/docs/methods.html wavesurfer method api
