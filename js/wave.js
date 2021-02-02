@@ -5,7 +5,7 @@ export const wavesurfer = WaveSurfer.create({
   cursorColor: "#333", // cursor bar's color
   cursorWidth: 2, // cursor bar's width
   barHeight: 0.8,
-  height: 250, // TODO: set height and modal content's entire size
+  height: 250,
   width: 500,
   barWidth: 5,
   responsive: true,
