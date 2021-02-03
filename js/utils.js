@@ -1,12 +1,3 @@
-export const spreadArrayEachKey = (obj, keyName1, keyName2) => {
-  return Object.entries(obj).flatMap((entry) => {
-    const [key, ...arr] = entry.flat();
-    return arr.map((item) => {
-      return { [keyName1]: key, [keyName2]: item };
-    });
-  });
-};
-
 export const shuffle = (arr) => {
   return arr.sort(() => Math.random() - 0.5);
 };

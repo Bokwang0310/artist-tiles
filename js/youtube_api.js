@@ -21,8 +21,8 @@ async function getChannelImg(API_KEY, artist) {
     .catch((err) => console.error(err));
 }
 
-export const storeChannelImg = (artistList, API_KEY) => {
-  return artistList.reduce(async (acc, curr) => {
+export const storeChannelImg = (artists, API_KEY) => {
+  return artists.reduce(async (acc, curr) => {
     const img = await getChannelImg(API_KEY, curr);
 
     return Object.assign(await acc.then(), { [curr]: img });

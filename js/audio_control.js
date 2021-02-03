@@ -83,14 +83,12 @@ export const addVolumeControlEvent = () => {
 
 export const togglePlay = () => {
   const modalPlay = document.querySelector(".audio-player .play-btn");
-  const miniPlayList = document.querySelectorAll(
-    ".mini-audio-player .play-btn"
-  );
+  const miniPlays = document.querySelectorAll(".mini-audio-player .play-btn");
 
   modalPlay.classList.toggle("fa-play");
   modalPlay.classList.toggle("fa-pause");
 
-  miniPlayList.forEach((miniPlay) => {
+  miniPlays.forEach((miniPlay) => {
     miniPlay.classList.toggle("fa-play-circle");
     miniPlay.classList.toggle("fa-pause-circle");
   });

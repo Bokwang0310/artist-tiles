@@ -1,7 +1,22 @@
-{
-  "BENEE": ["Find An Island"],
-  "Ariana Grande": ["Positions"],
-  "Almost Monday": ["Broken People"],
-  "Easy Life": ["Pockets", "Nightmares"],
-  "Heyden": ["You Got Me"]
-}
+[
+  {
+    "name": "BENEE",
+    "musics": ["Find An Island"]
+  },
+  {
+    "name": "Ariana Grande",
+    "musics": ["Positions"]
+  },
+  {
+    "name": "Almost Monday",
+    "musics": ["Broken People"]
+  },
+  {
+    "name": "Easy Life",
+    "musics": ["Pockets", "Nightmares"]
+  },
+  {
+    "name": "Heyden",
+    "musics": ["You Got Me"]
+  }
+]

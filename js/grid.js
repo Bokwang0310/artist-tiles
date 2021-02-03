@@ -7,8 +7,8 @@ export const setGrid = () => {
     window.getComputedStyle(grid).getPropertyValue("grid-row-gap")
   );
 
-  const itemList = grid.querySelectorAll(".img-box");
-  itemList.forEach((item) => {
+  const items = grid.querySelectorAll(".img-box");
+  items.forEach((item) => {
     item.style.gridRowEnd = `span ${Math.floor(
       item.children[0].offsetHeight / 25
     )}`;

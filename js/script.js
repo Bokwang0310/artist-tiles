@@ -1,5 +1,5 @@
 import { setGrid } from "./grid.js";
-import { getOrder, spreadArrayEachKey } from "./utils.js";
+import { getOrder } from "./utils.js";
 import { createImgElements } from "./tiles.js";
 import { handleClickMiniPlayer, addImgEvent } from "./event.js";
 
@@ -8,15 +8,21 @@ async function init() {
   window.addEventListener("load", setGrid);
   window.addEventListener("resize", setGrid);
 
-  const orderObj = await getOrder("./order.json");
-  const artistList = Object.keys(orderObj);
-  const musicList = spreadArrayEachKey(orderObj, "artist", "name");
+  const orders = await getOrder("./order.json");
 
-  await createImgElements(artistList, musicList);
+  const artists = orders.map((order) => order.name);
+  const musics = orders.reduce((acc, { name, musics }) => {
+    const musicsOfCurrArtist = musics.map((e) => {
+      return { artist: name, music: e };
+    });
+    return [...acc, ...musicsOfCurrArtist];
+  }, []);
+
+  await createImgElements(artists, musics);
   setGrid();
 
-  const miniPlayerList = document.querySelectorAll(".mini-audio-player");
-  miniPlayerList.forEach((miniPlayer) => {
+  const miniPlayers = document.querySelectorAll(".mini-audio-player");
+  miniPlayers.forEach((miniPlayer) => {
     miniPlayer.addEventListener("click", handleClickMiniPlayer);
   });
 

@@ -5,14 +5,12 @@ import { addVolumeControlEvent, togglePlay } from "./audio_control.js";
 function handleClickImg(e) {
   if (!wavesurfer.isPlaying()) {
     const modalPlay = document.querySelector(".audio-player .play-btn");
-    const miniPlayList = document.querySelectorAll(
-      ".mini-audio-player .play-btn"
-    );
+    const miniPlays = document.querySelectorAll(".mini-audio-player .play-btn");
 
     modalPlay.classList.remove("fa-play");
     modalPlay.classList.add("fa-pause");
 
-    miniPlayList.forEach((miniPlay) => {
+    miniPlays.forEach((miniPlay) => {
       miniPlay.classList.remove("fa-play-circle");
       miniPlay.classList.add("fa-pause-circle");
     });
