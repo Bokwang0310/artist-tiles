@@ -1,17 +1,17 @@
 import { getApiKey, storeChannelImg } from "./youtube_api.js";
 import { shuffle, hasSameElements } from "./utils.js";
 
-function createMusicElement(channelImgs, music) {
+function createMusicElement(channelImgs, musicInfo) {
   const container = document.querySelector(".container");
 
   const imgBox = document.createElement("div");
   imgBox.classList.add("img-box");
 
-  const channelImg = channelImgs[music.artist];
+  const channelImg = channelImgs[musicInfo.artist];
 
   const img = document.createElement("img");
   img.src = channelImg;
-  img.alt = `${music.artist} - ${music.name}`;
+  img.alt = `${musicInfo.artist} - ${musicInfo.music}`;
 
   const miniAudioPlayer = document.createElement("div");
   miniAudioPlayer.classList.add("mini-audio-player");
@@ -53,19 +53,19 @@ async function getChannelImgs(oldObj, newArr, API_KEY) {
   // sessionStorage.setItem("channelImgs", JSON.stringify(channelImgs));
   // return channelImgs;
 
-  return await fetch("./channel_img_list_example.json").then((res) =>
+  return fetch("./api_examples/channel_img_list_example.json").then((res) =>
     res.json()
   );
 }
 
-export const createImgElements = async (artists, musics) => {
+export const createImgElements = async (artists, musicInfos) => {
   const API_KEY = await getApiKey("./youtube_data_api_v3_key.txt");
 
-  const oldObj = JSON.parse(sessionStorage.getItem("channelImgList"));
+  const oldObj = JSON.parse(sessionStorage.getItem("channelImgs"));
 
-  const channelImgList = await getChannelImgs(oldObj, artists, API_KEY);
+  const channelImgs = await getChannelImgs(oldObj, artists, API_KEY);
 
-  shuffle(musics).forEach((music) => {
-    createMusicElement(channelImgList, music);
+  shuffle(musicInfos).forEach((musicInfo) => {
+    createMusicElement(channelImgs, musicInfo);
   });
 };

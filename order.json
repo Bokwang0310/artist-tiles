@@ -1,22 +1,22 @@
 [
   {
-    "name": "BENEE",
+    "artist": "BENEE",
     "musics": ["Find An Island"]
   },
   {
-    "name": "Ariana Grande",
+    "artist": "Ariana Grande",
     "musics": ["Positions"]
   },
   {
-    "name": "Almost Monday",
+    "artist": "Almost Monday",
     "musics": ["Broken People"]
   },
   {
-    "name": "Easy Life",
+    "artist": "Easy Life",
     "musics": ["Pockets", "Nightmares"]
   },
   {
-    "name": "Heyden",
+    "artist": "Heyden",
     "musics": ["You Got Me"]
   }
 ]

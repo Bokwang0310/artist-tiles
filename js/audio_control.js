@@ -1,5 +1,7 @@
 import { wavesurfer } from "./wave.js";
 
+// TODO: consider turning volumeSlider into global variable
+
 // :(
 let isQuiet = false;
 
@@ -17,8 +19,6 @@ function handleClickMute() {
 }
 
 function handleClickSlider(e) {
-  console.log("Clicked Volume Slider");
-
   const volumeSlider = document.querySelector(".volume-slider");
   const volumeBtn = document.querySelector(".audio-player .volume-btn");
   const volumePercentage = document.querySelector(".volume-percentage");
@@ -56,14 +56,15 @@ function handleMouseOverVolumeControl() {
 }
 
 export const addVolumeControlEvent = () => {
-  const volumeBtnBox = document.querySelector(
+  const volumeBtnContainer = document.querySelector(
     ".audio-player .volume-btn-container"
   );
 
-  volumeBtnBox.removeEventListener("click", handleClickMute);
-  volumeBtnBox.addEventListener("click", handleClickMute);
+  volumeBtnContainer.removeEventListener("click", handleClickMute);
+  volumeBtnContainer.addEventListener("click", handleClickMute);
 
   const volumeSlider = document.querySelector(".volume-slider");
+  volumeSlider.removeEventListener("click", handleClickSlider);
   // TODO: change volume by dragging
   volumeSlider.addEventListener("click", handleClickSlider);
 
@@ -82,15 +83,17 @@ export const addVolumeControlEvent = () => {
 };
 
 export const togglePlay = () => {
-  const modalPlay = document.querySelector(".audio-player .play-btn");
-  const miniPlays = document.querySelectorAll(".mini-audio-player .play-btn");
+  const modalPlayBtn = document.querySelector(".audio-player .play-btn");
+  const miniPlayBtns = document.querySelectorAll(
+    ".mini-audio-player .play-btn"
+  );
 
-  modalPlay.classList.toggle("fa-play");
-  modalPlay.classList.toggle("fa-pause");
+  modalPlayBtn.classList.toggle("fa-play");
+  modalPlayBtn.classList.toggle("fa-pause");
 
-  miniPlays.forEach((miniPlay) => {
-    miniPlay.classList.toggle("fa-play-circle");
-    miniPlay.classList.toggle("fa-pause-circle");
+  miniPlayBtns.forEach((miniPlayBtn) => {
+    miniPlayBtn.classList.toggle("fa-play-circle");
+    miniPlayBtn.classList.toggle("fa-pause-circle");
   });
 
   wavesurfer.playPause();

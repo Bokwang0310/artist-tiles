@@ -10,19 +10,18 @@ async function init() {
 
   const orders = await getOrder("./order.json");
 
-  const artists = orders.map((order) => order.name);
-  const musics = orders.reduce((acc, { name, musics }) => {
-    const musicsOfCurrArtist = musics.map((e) => {
-      return { artist: name, music: e };
+  const artists = orders.map((order) => order.artist);
+  const musicInfos = orders.reduce((acc, { artist, musics }) => {
+    const musicsOfCurrArtist = musics.map((music) => {
+      return { artist, music };
     });
     return [...acc, ...musicsOfCurrArtist];
   }, []);
 
-  await createImgElements(artists, musics);
+  await createImgElements(artists, musicInfos);
   setGrid();
 
-  const miniPlayers = document.querySelectorAll(".mini-audio-player");
-  miniPlayers.forEach((miniPlayer) => {
+  document.querySelectorAll(".mini-audio-player").forEach((miniPlayer) => {
     miniPlayer.addEventListener("click", handleClickMiniPlayer);
   });
 
