@@ -1,7 +1,14 @@
 <template>
   <div class="container">
-    <!-- v-for -->
-    <div v-for="(musicInfo, i) in musicInfos" :key="i" class="img-box">
+    <div
+      v-for="(musicInfo, i) in musicInfos"
+      class="img-box"
+      :key="i"
+      @click="
+        $store.commit('setModalState', true);
+        playMusic($event);
+      "
+    >
       <img
         :src="channelImgs[musicInfo.artist]"
         :alt="`${musicInfo.artist} - ${musicInfo.music}`"
@@ -24,7 +31,37 @@ export default {
       musicInfos: [],
     };
   },
-  async created() {
+  methods: {
+    playMusic(e) {
+      window.wavesurfer.load(`../audios/${e.target.alt}.mp3`);
+      window.wavesurfer.on("ready", () => {
+        window.wavesurfer.play();
+        this.$store.commit("setPlayingState", true);
+      });
+    },
+  },
+  async mounted() {
+    // :(
+    window.wavesurfer = window.WaveSurfer.create({
+      container: ".waveform",
+      waveColor: "violet",
+      progressColor: "purple",
+      cursorColor: "#333",
+      cursorWidth: 2,
+      barHeight: 0.8,
+      height: 250,
+      width: 500,
+      barWidth: 5,
+      responsive: true,
+      barRadius: 2,
+      autoCenter: true,
+      scrollParent: false,
+      hideScrollbar: true,
+      barMinHeight: 2,
+      normalize: true,
+    });
+    window.wavesurfer.setVolume(0.5);
+
     const orders = await fetch("../order.json")
       .then((res) => res.json())
       .catch((err) => console.error(err));

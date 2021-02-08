@@ -1,20 +1,22 @@
 <template>
   <div id="app">
-    <app-header />
-    <tiles />
-    <modal />
+    <Header />
+    <Tiles />
+    <Modal />
   </div>
 </template>
 
 <script>
-import AppHeader from "./components/AppHeader.vue";
+import Header from "./components/Header.vue";
 import Tiles from "./components/Tiles.vue";
 import Modal from "./components/Modal.vue";
+import store from "./store.js";
 
 export default {
   name: "App",
+  store,
   components: {
-    AppHeader,
+    Header,
     Tiles,
     Modal,
   },

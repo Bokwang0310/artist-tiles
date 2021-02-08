@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modal" v-show="$store.state.isModalShow" @click="hideModal">
     <div class="modal-content">
       <span class="modal-close">✖</span>
       <player />
@@ -15,12 +15,21 @@ export default {
   components: {
     Player,
   },
+  methods: {
+    hideModal(e) {
+      if (
+        e.target === document.querySelector(".modal") ||
+        e.target === document.querySelector(".modal-close")
+      ) {
+        this.$store.commit("setModalState", false);
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .modal {
-  display: none;
   position: fixed;
   z-index: 1;
   left: 0;

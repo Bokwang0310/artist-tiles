@@ -2,24 +2,90 @@
   <div class="audio-player">
     <div class="waveform"></div>
     <div class="audio-control">
-      <div class="play-btn-container">
-        <i class="play-btn fas fa-pause fa-lg"></i>
+      <div class="play-btn-container" @click="togglePlay">
+        <font-awesome-icon class="play-btn" :icon="playBtnIcon" size="lg" />
       </div>
       <div class="volume-control">
-        <div class="volume-btn-container">
-          <i class="volume-btn fas fa-volume-up fa-lg"></i>
+        <div
+          class="volume-btn-container"
+          @click="toggleMute"
+          @mouseenter="showSlider"
+          @mouseleave="hideSlider"
+        >
+          <font-awesome-icon
+            class="volume-btn"
+            :icon="volumeBtnIcon"
+            size="lg"
+          />
         </div>
-        <div class="volume-slider">
-          <div class="volume-percentage"></div>
+        <div
+          class="volume-slider"
+          :class="isSliderShow"
+          @click="changeVolume"
+          @mouseenter="showSlider"
+          @mouseleave="hideSlider"
+        >
+          <div
+            class="volume-percentage"
+            :style="{ width: $store.getters.getVolumePercentage }"
+          ></div>
         </div>
       </div>
     </div>
   </div>
+  <!-- https://github.com/FortAwesome/vue-fontawesome -->
+  <!-- ERR: infinity call event on slider -->
 </template>
 
 <script>
 export default {
   name: "Player",
+  data() {
+    return {
+      isSliderShow: "",
+    };
+  },
+  computed: {
+    playBtnIcon() {
+      return this.$store.state.isPlaying ? "pause" : "play";
+    },
+    volumeBtnIcon() {
+      return this.$store.getters.getVolumeString;
+    },
+  },
+  methods: {
+    togglePlay() {
+      window.wavesurfer.playPause();
+      this.$store.commit(
+        "setPlayingState",
+        this.$store.state.isPlaying ? false : true
+      );
+    },
+    toggleMute() {
+      window.wavesurfer.toggleMute();
+      if (this.$store.state.volume === 0) {
+        console.log("implement histroy");
+        // TODO!
+        this.$store.commit("setVolumeState", 0.5);
+      } else {
+        this.$store.commit("setVolumeState", 0);
+        console.log(window.wavesurfer.getVolume());
+      }
+    },
+    showSlider() {
+      this.isSliderShow = "hover";
+    },
+    hideSlider() {
+      this.isSliderShow = "";
+    },
+    changeVolume(e) {
+      const newVolume = e.offsetX / parseInt(e.currentTarget.offsetWidth);
+      this.$store.commit("setVolumeState", newVolume);
+      this.styleObject = {
+        width: this.$store.getters.getVolumePercentage,
+      };
+    },
+  },
 };
 </script>
 
