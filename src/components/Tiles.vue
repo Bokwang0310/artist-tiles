@@ -1,23 +1,4 @@
 <template>
-  <!-- <div
-      v-for="(musicInfo, i) in musicInfos"
-      class="img-box"
-      :key="i"
-      @click="
-        $store.commit('setModalState', true);
-        playMusic($event);
-      "
-    >
-      <img
-        :src="channelImgs[musicInfo.artist]"
-        :alt="`${musicInfo.artist} - ${musicInfo.music}`"
-      />
-      <div class="mini-audio-player">
-        <div class="play-btn-continer">
-          <i class="play-btn"></i>
-        </div>
-      </div>
-    </div> -->
   <b-card-group columns>
     <b-card
       v-for="(musicInfo, i) in musicInfos"
@@ -25,12 +6,18 @@
       :img-src="channelImgs[musicInfo.artist]"
       :img-alt="`${musicInfo.artist} - ${musicInfo.music}`"
       overlay
+      @click="handleClick"
     ></b-card>
+    <div class="mini-audio-player">
+      <div class="play-btn-continer">
+        <i class="play-btn"></i>
+      </div>
+    </div>
   </b-card-group>
 </template>
 
 <script>
-import { storeChannelImg } from "../apis";
+import { getApiKey, getChannelImgs } from "../apis";
 
 export default {
   name: "Tiles",
@@ -45,8 +32,15 @@ export default {
     };
   },
   methods: {
-    playMusic(e) {
-      window.wavesurfer.load(`../audios/${e.target.alt}.mp3`);
+    handleClick(e) {
+      console.log("sdlkjf");
+      if (e.target.classList.contains("card-body")) {
+        this.$store.commit("setModalState", true);
+        this.playMusic(e.target.parentElement.children[0].alt);
+      }
+    },
+    playMusic(musicName) {
+      window.wavesurfer.load(`../audios/${musicName}.mp3`);
       window.wavesurfer.on("ready", () => {
         window.wavesurfer.play();
         this.$store.commit("setPlayingState", true);
@@ -87,13 +81,11 @@ export default {
       return [...acc, ...musicsOfCurrArtist];
     }, []);
 
-    const API_KEY = await fetch("../youtube_data_api_v3_key.txt").then((res) =>
-      res.text()
-    );
+    const API_KEY = await getApiKey("./youtube_data_api_v3_key.txt");
 
-    const channelImgs = await storeChannelImg(artists, API_KEY);
-    console.log(channelImgs);
-    // TODO: make cache sys first
+    const oldObj = JSON.parse(sessionStorage.getItem("channelImgs"));
+    const channelImgs = await getChannelImgs(oldObj, artists, API_KEY);
+
     this.musicInfos = musicInfos;
     this.channelImgs = channelImgs;
   },

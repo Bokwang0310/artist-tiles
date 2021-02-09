@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Header />
-    <Tiles />
     <Modal />
+    <Tiles />
   </div>
 </template>
 

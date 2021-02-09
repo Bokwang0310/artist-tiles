@@ -1,14 +1,17 @@
 <template>
-  <div class="modal" v-show="$store.state.isModalShow" @click="hideModal">
+  <div class="modal" v-show="isModalShow" @click="hideModal">
     <div class="modal-content">
-      <span class="modal-close">✖</span>
-      <player />
+      <div class="modal-close-container">
+        <font-awesome-icon class="modal-close" icon="times" />
+      </div>
+      <Player />
     </div>
   </div>
 </template>
 
 <script>
 import Player from "./Player.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "Modal",
@@ -19,17 +22,21 @@ export default {
     hideModal(e) {
       if (
         e.target === document.querySelector(".modal") ||
-        e.target === document.querySelector(".modal-close")
+        e.target === document.querySelector(".modal-close-container")
       ) {
         this.$store.commit("setModalState", false);
       }
     },
+  },
+  computed: {
+    ...mapState(["isModalShow"]),
   },
 };
 </script>
 
 <style scoped>
 .modal {
+  display: block;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -66,6 +73,5 @@ export default {
 .modal-close:hover {
   cursor: pointer;
   color: black;
-  text-decoration: none;
 }
 </style>
