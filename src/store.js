@@ -8,6 +8,7 @@ export default new Vuex.Store({
     isModalShow: false,
     isPlaying: false,
     volume: 0.5,
+    previousVolume: 0.5,
   },
   mutations: {
     setModalState(state, newState) {
@@ -17,6 +18,8 @@ export default new Vuex.Store({
       state.isPlaying = newState;
     },
     setVolumeState(state, newState) {
+      state.previousVolume = state.volume;
+
       window.wavesurfer.setVolume(newState);
       state.volume = newState;
     },

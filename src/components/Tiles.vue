@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-    <div
+  <!-- <div
       v-for="(musicInfo, i) in musicInfos"
       class="img-box"
       :key="i"
@@ -18,17 +17,31 @@
           <i class="play-btn"></i>
         </div>
       </div>
-    </div>
-  </div>
+    </div> -->
+  <b-card-group columns>
+    <b-card
+      v-for="(musicInfo, i) in musicInfos"
+      :key="i"
+      :img-src="channelImgs[musicInfo.artist]"
+      :img-alt="`${musicInfo.artist} - ${musicInfo.music}`"
+      overlay
+    ></b-card>
+  </b-card-group>
 </template>
 
 <script>
+import { storeChannelImg } from "../apis";
+
 export default {
   name: "Tiles",
   data() {
     return {
       channelImgs: [],
       musicInfos: [],
+      windowSize: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      },
     };
   },
   methods: {
@@ -66,7 +79,7 @@ export default {
       .then((res) => res.json())
       .catch((err) => console.error(err));
 
-    // const artists = orders.map((order) => order.artist);
+    const artists = orders.map((order) => order.artist);
     const musicInfos = orders.reduce((acc, { artist, musics }) => {
       const musicsOfCurrArtist = musics.map((music) => {
         return { artist, music };
@@ -74,46 +87,33 @@ export default {
       return [...acc, ...musicsOfCurrArtist];
     }, []);
 
-    const channelImgs = await fetch(
-      "../channel_img_list_example.json"
-    ).then((res) => res.json());
+    const API_KEY = await fetch("../youtube_data_api_v3_key.txt").then((res) =>
+      res.text()
+    );
 
+    const channelImgs = await storeChannelImg(artists, API_KEY);
+    console.log(channelImgs);
+    // TODO: make cache sys first
     this.musicInfos = musicInfos;
     this.channelImgs = channelImgs;
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   },
 };
 </script>
 
 <style scoped>
-.container {
-  display: grid;
-  max-width: 55em;
-  width: 100%;
+.card-columns {
   margin: 0 auto;
-  min-height: 27em; /* 400px */
-  grid-template-columns: repeat(auto-fill, minmax(13em, 1fr)); /* 150px */
-  grid-auto-rows: 1em; /* 20px */
-  grid-gap: 0.7em; /* 5px */
+  width: 50%;
+  height: 50%;
 }
 
-.img-box {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-img {
-  width: 100%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-img.focus {
+/* img.focus {
   filter: brightness(40%) blur(0.3em);
   transform: translate(-50%, -50%);
-}
+} */
 
 .mini-audio-player.show {
   color: white;

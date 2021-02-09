@@ -27,16 +27,14 @@ export default {
 * {
   user-select: none;
   -webkit-user-drag: none;
+}
+
+body {
   margin: 0;
   padding: 0;
-}
-
-html {
-  width: 100%;
   height: 100%;
 }
-
-html {
+body {
   background: linear-gradient(
     180deg,
     rgba(246, 235, 255, 1) 0%,

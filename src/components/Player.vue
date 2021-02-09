@@ -64,12 +64,9 @@ export default {
     toggleMute() {
       window.wavesurfer.toggleMute();
       if (this.$store.state.volume === 0) {
-        console.log("implement histroy");
-        // TODO!
-        this.$store.commit("setVolumeState", 0.5);
+        this.$store.commit("setVolumeState", this.$store.state.previousVolume);
       } else {
         this.$store.commit("setVolumeState", 0);
-        console.log(window.wavesurfer.getVolume());
       }
     },
     showSlider() {
