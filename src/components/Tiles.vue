@@ -43,7 +43,7 @@ export default {
   methods: {
     handleClick(e) {
       this.$store.commit("setModalState", true);
-      this.playMusic(e.target.parentElement.children[0].alt);
+      this.playMusic(e.target.alt);
     },
     playMusic(musicName) {
       window.wavesurfer.load(`../audios/${musicName}.mp3`);
