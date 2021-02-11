@@ -17,11 +17,9 @@ header {
   align-items: center;
 }
 h1 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 800;
-  /* text-transform: uppercase; */
+  font-family: "Titillium Web", sans-serif;
   text-align: center;
-  font-size: 3.5rem;
+  font-size: 6vmax;
   width: 100%;
   margin-bottom: 0;
   line-height: 100%;

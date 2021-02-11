@@ -1,21 +1,30 @@
 <template>
-  <b-card-group columns>
-    <b-card
-      v-for="(musicInfo, i) in musicInfos"
-      :key="i"
-      :img-src="channelImgs[musicInfo.artist]"
-      :img-alt="`${musicInfo.artist} - ${musicInfo.music}`"
-      overlay
-      @click="handleClick"
-    ></b-card>
-    <div class="mini-audio-player">
-      <div class="play-btn-continer">
-        <i class="play-btn"></i>
-      </div>
-    </div>
-  </b-card-group>
+  <b-container fluid>
+    <b-row
+      class="img-container"
+      align-h="start"
+      cols="2"
+      cols-sm="3"
+      cols-md="3"
+      cols-lg="4"
+      cols-xl="5"
+    >
+      <b-img
+        v-for="(musicInfo, i) in musicInfos"
+        :key="i"
+        :src="channelImgs[musicInfo.artist]"
+        :alt="`${musicInfo.artist} - ${musicInfo.music}`"
+        @click="handleClick"
+      >
+        <div class="mini-audio-player">
+          <div class="play-btn-continer">
+            <i class="play-btn"></i>
+          </div>
+        </div>
+      </b-img>
+    </b-row>
+  </b-container>
 </template>
-
 <script>
 import { getApiKey, getChannelImgs } from "../apis";
 
@@ -34,10 +43,12 @@ export default {
   methods: {
     handleClick(e) {
       console.log("sdlkjf");
-      if (e.target.classList.contains("card-body")) {
-        this.$store.commit("setModalState", true);
-        this.playMusic(e.target.parentElement.children[0].alt);
-      }
+      // if (e.target.classList.contains("card-body")) {
+      //   this.$store.commit("setModalState", true);
+      //   this.playMusic(e.target.parentElement.children[0].alt);
+      // }
+      this.$store.commit("setModalState", true);
+      this.playMusic(e.target.parentElement.children[0].alt);
     },
     playMusic(musicName) {
       window.wavesurfer.load(`../audios/${musicName}.mp3`);
@@ -96,10 +107,13 @@ export default {
 </script>
 
 <style scoped>
-.card-columns {
+.img-container {
+  width: 90%;
   margin: 0 auto;
-  width: 50%;
-  height: 50%;
+}
+
+img {
+  padding: 1.2%;
 }
 
 /* img.focus {
