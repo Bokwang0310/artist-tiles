@@ -33,3 +33,10 @@ npm run lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+# TODO:
+
+- hovering event
+- body, html size err
+- responsive modal, font size and margin of header
+- fix volume slider

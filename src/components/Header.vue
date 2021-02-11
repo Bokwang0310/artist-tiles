@@ -19,7 +19,7 @@ header {
 h1 {
   font-family: "Titillium Web", sans-serif;
   text-align: center;
-  font-size: 6vmax;
+  font-size: 10vmin;
   width: 100%;
   margin-bottom: 0;
   line-height: 100%;
