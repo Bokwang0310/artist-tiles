@@ -1,7 +1,7 @@
 <template>
-  <div class="modal" v-show="isModalShow" @click="hideModal">
+  <div class="modal" v-show="isModalShow" @click="clickOutside">
     <div class="modal-content">
-      <div class="modal-close-container">
+      <div class="modal-close-container" @click="clickClose">
         <font-awesome-icon class="modal-close" icon="times" />
       </div>
       <Player />
@@ -19,13 +19,14 @@ export default {
     Player,
   },
   methods: {
-    hideModal(e) {
-      if (
-        e.target === document.querySelector(".modal") ||
-        e.target === document.querySelector(".modal-close-container")
-      ) {
-        this.$store.commit("setModalState", false);
-      }
+    hideModal() {
+      this.$store.commit("setModalState", false);
+    },
+    clickOutside(e) {
+      if (e.target === document.querySelector(".modal")) this.hideModal();
+    },
+    clickClose() {
+      this.hideModal();
     },
   },
   computed: {

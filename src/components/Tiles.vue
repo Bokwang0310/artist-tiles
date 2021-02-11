@@ -42,11 +42,6 @@ export default {
   },
   methods: {
     handleClick(e) {
-      console.log("sdlkjf");
-      // if (e.target.classList.contains("card-body")) {
-      //   this.$store.commit("setModalState", true);
-      //   this.playMusic(e.target.parentElement.children[0].alt);
-      // }
       this.$store.commit("setModalState", true);
       this.playMusic(e.target.parentElement.children[0].alt);
     },
