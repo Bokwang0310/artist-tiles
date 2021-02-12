@@ -6,18 +6,6 @@
 
 > [Cost of Youtube Data API](https://developers.google.com/youtube/v3/getting-started#quota)
 
-## Project setup
-
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
 ### Compiles and minifies for production
 
 ```
@@ -36,7 +24,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # TODO:
 
-- hovering event
+- redeisign volume slider
+- tile hovering event
 - body, html size err
-- responsive modal, font size and margin of header
-- fix volume slider
+- responsive modal, font size, margin of header
+- mini audio player
+- play and mute button click range

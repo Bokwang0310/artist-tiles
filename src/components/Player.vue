@@ -5,13 +5,12 @@
       <div class="play-btn-container" @click="togglePlay">
         <font-awesome-icon class="play-btn" :icon="playBtnIcon" size="lg" />
       </div>
-      <div class="volume-control">
-        <div
-          class="volume-btn-container"
-          @click="toggleMute"
-          @mouseenter="showSlider"
-          @mouseleave="hideSlider"
-        >
+      <div
+        class="volume-control"
+        @mouseenter="showSlider"
+        @mouseleave="hideSlider"
+      >
+        <div class="volume-btn-container" @click="toggleMute">
           <font-awesome-icon
             class="volume-btn"
             :icon="volumeBtnIcon"
@@ -20,10 +19,9 @@
         </div>
         <div
           class="volume-slider"
-          :class="isSliderShow"
+          :style="isSliderShow"
           @click="changeVolume"
           @mouseenter="showSlider"
-          @mouseleave="hideSlider"
         >
           <div
             class="volume-percentage"
@@ -33,8 +31,6 @@
       </div>
     </div>
   </div>
-  <!-- https://github.com/FortAwesome/vue-fontawesome -->
-  <!-- ERR: infinity call event on slider -->
 </template>
 
 <script>
@@ -42,7 +38,8 @@ export default {
   name: "Player",
   data() {
     return {
-      isSliderShow: "",
+      isSliderShow: { width: 0 },
+      timer: null,
     };
   },
   computed: {
@@ -70,10 +67,13 @@ export default {
       }
     },
     showSlider() {
-      this.isSliderShow = "hover";
+      clearTimeout(this.timer);
+      this.isSliderShow = { width: "7em" };
     },
     hideSlider() {
-      this.isSliderShow = "";
+      this.timer = setTimeout(() => {
+        this.isSliderShow = { width: 0 };
+      }, 500);
     },
     changeVolume(e) {
       const newVolume = e.offsetX / parseInt(e.currentTarget.offsetWidth);
@@ -117,7 +117,8 @@ wave {
   margin: auto 0.5em;
 }
 
-.audio-player .play-btn:hover {
+.audio-player .play-btn:hover,
+.audio-player .volume-btn:hover {
   transform: scale(1.1);
 }
 
@@ -132,26 +133,18 @@ wave {
   margin: auto 0.5em;
 }
 
-.audio-player .volume-btn:hover {
-  transform: scale(1.1);
-}
-
 .volume-slider {
   display: inline-block;
   cursor: pointer;
   height: 0.7em;
   width: 0;
   background-color: violet;
-  transition: 0.25s;
-}
-
-.hover {
-  width: 7em;
+  transition: 0.3s;
+  transform: translateZ(0);
 }
 
 .volume-percentage {
   background: purple;
   height: 100%;
-  width: 50%;
 }
 </style>
