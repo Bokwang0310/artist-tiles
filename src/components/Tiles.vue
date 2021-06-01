@@ -16,12 +16,13 @@
         :alt="`${musicInfo.artist} - ${musicInfo.music}`"
         @click="handleClick"
       >
-        <div class="mini-audio-player">
-          <div class="play-btn-continer">
-            <i class="play-btn"></i>
-          </div>
-        </div>
       </b-img>
+      <div :class="isMiniPlayerShow ? 'show' : ''" class="mini-audio-player">
+        <div class="play-btn-continer">
+          <!-- <i class="play-btn"></i> -->
+          <font-awesome-icon class="play-btn" icon="pause-circle" />
+        </div>
+      </div>
     </b-row>
   </b-container>
 </template>
@@ -34,16 +35,14 @@ export default {
     return {
       channelImgs: [],
       musicInfos: [],
-      windowSize: {
-        width: window.innerWidth,
-        height: window.innerHeight,
-      },
+      isMiniPlayerShow: false,
     };
   },
   methods: {
     handleClick(e) {
       this.$store.commit("setModalState", true);
       this.playMusic(e.target.alt);
+      this.isMiniPlayerShow = true;
     },
     playMusic(musicName) {
       window.wavesurfer.load(`../audios/${musicName}.mp3`);
